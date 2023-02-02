@@ -1,0 +1,18 @@
+name: Hardware Test
+
+on:
+  pull_request:
+    types: [opened, synchronize, closed]
+    branches:
+      - "main"
+      - "master"
+
+jobs:
+  test-hardware:
+    runs-on: [self-hosted, linux, ARM64]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - run: npm install && npm test-hardware
